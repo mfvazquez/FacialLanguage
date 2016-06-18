@@ -17,13 +17,6 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
     
     %% ------------------- INICIO DEL BLOQUE -----------------------
     
-    if (marcas) 
-        io32(pportobj,pportaddr,MARCA_INICIO);
-        WaitSecs(0.05);
-        io32(pportobj,pportaddr,0);
-    end 
-
-    
     log.inicio = GetSecs;
     for i = 1:length(bloque.palabra)
         %% ----------------- FIJACION -------------------------------
@@ -32,6 +25,12 @@ function [exit, log] = CorrerBloque(bloque, botones, log, marcas)
         textoCentrado('+', 0.05);
         [~, OnSetTime] = Screen('Flip',hd.window);
          
+        if (marcas) 
+            io32(pportobj,pportaddr,MARCA_INICIO);
+            WaitSecs(0.05);
+            io32(pportobj,pportaddr,0);
+        end 
+        
         if experimental
             log.fijacion_time{1,i} = OnSetTime;
         end
